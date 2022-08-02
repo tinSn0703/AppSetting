@@ -75,7 +75,7 @@ namespace Setting
 			if (_stream is null) throw new ArgumentNullException(nameof(_stream));
 
 			XElement _temp = null;	_stream.Read(out _temp);
-			if (_temp is null) throw new Exception("Couldn't get [" + _stream.ElementName + "].");
+			if (_temp is null) throw new System.Xml.XmlException("Couldn't get [" + _stream.ElementName + "].");
 
 			XElement _element = _root.Element(_stream.ElementName);
 			if (_element is null)	_root.Add(_temp);
@@ -100,7 +100,7 @@ namespace Setting
 			if (_stream is null) throw new ArgumentNullException(nameof(_stream));
 
 			XElement _element = _root.Element(_stream.ElementName);
-			if (_element is null) throw new Exception("The element [" + _stream.ElementName + "] doesn't exist in the setting file.");
+			if (_element is null) { throw new System.Xml.XmlException("The element [" + _stream.ElementName + "] doesn't exist in the setting file.");	}
 
 			_stream.Write(_root.Element(_stream.ElementName));
 		}
